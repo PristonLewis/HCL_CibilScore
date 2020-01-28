@@ -1,0 +1,31 @@
+<div class="container mt-2" style="text-align:center">
+    <div>
+      <h3 style="color: orange">List of Bench Resources</h3>
+    </div>
+    <p-table #dt [value]="response" [rows]="9" [paginator]="true" [scrollable]="true" [autoLayout]="true"
+          [responsive]="true" dataKey="claimId" rowExpandMode="single">
+      
+          <ng-template pTemplate="header">
+            <tr>
+              <th style="width:25%">Employee Id</th>
+              <th style="width:25%">Employee Name</th>
+              <th style="width:25%">Experiance</th>
+              <th style="width:25%">Emaild Id</th>
+              <th style="width:25%">Phone Number</th>
+              <th style="width:25%">Action</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-emp>
+            <tr>
+              <td style="width:25%">{{emp.employeeId}}</td>
+              <td style="width:25%">{{emp.employeeName}}</td>
+              <td style="width:25%">{{emp.experience}}</td>
+              <td style="width:25%">{{emp.mailId}}</td>
+              <td style="width:25%">{{emp.phoneNumber}}</td>
+              <td style="width:25%">
+                <button class="btn btn-success btn-sm mr-1" icon="pi pi-check" (click)="viewDetails(emp.employeeId)">View</button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+</div>
