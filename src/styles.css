@@ -31,3 +31,6 @@
     transform: rotate(0deg);
   }
 }
+.ui-accordion .ui-accordion-header {
+    margin-top: 20px !important; 
+}

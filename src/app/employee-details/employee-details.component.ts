@@ -12,6 +12,7 @@ export class EmployeeDetailsComponent implements OnInit {
   pieChartdata: any;
   cibilChartdata: any;
   spinner = false;
+  employeeDetail: any;
   constructor(private api: CommonService, private route: ActivatedRoute) {
     this.barChartdata = {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -81,12 +82,23 @@ export class EmployeeDetailsComponent implements OnInit {
       this.spinner = false;
     });
   }
-  ngOnInit() {
 
+  private getEmpolyeeDetails(employeeId: string) {
+    const url = '';
+    this.spinner =  true;
+    this.api.getList(url).subscribe(detail => {
+      this.spinner =  false;
+      this.employeeDetail = detail;
+    }, error => {
+      this.spinner = false;
+    });
+  }
+  ngOnInit() {
     this.route.params.subscribe(params => {
      this.getOverAllPerformance(params.id);
      this.getYearWiseReport(params.id);
      this.getCibilScore(params.id);
+     this.getEmpolyeeDetails(params.id);
     });
   }
 

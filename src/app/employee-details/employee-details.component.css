@@ -1,3 +1,9 @@
 h3 {
     text-align: center;
 }
+.padding-bottom{
+    padding-bottom: 70px;
+}
+.employee-container{
+    padding: 20px 10px;
+}
