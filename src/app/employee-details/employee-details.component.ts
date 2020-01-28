@@ -89,7 +89,6 @@ export class EmployeeDetailsComponent implements OnInit {
     this.api.getList(url).subscribe(detail => {
       this.spinner =  false;
       this.employeeDetail = detail;
-      console.log(detail)
     }, error => {
       this.spinner = false;
     });
