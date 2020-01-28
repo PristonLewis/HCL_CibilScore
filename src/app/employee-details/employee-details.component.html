@@ -3,16 +3,33 @@
 </div>
 <div class="employee-container">
     <p-accordion>
-        <p-accordionTab header="Employee Personal Details" >
+        <p-accordionTab header="Employee Details" >
             <p-accordion>
                 <p-accordionTab header="Project Details" >
-                   Content 1
+                  <ul>
+                      <li *ngFor="let project of employeeDetail?.employeeProjectList">
+                          <span>Project Name: <strong>{{project.project.projectName}}</strong></span>
+                          <span>Start Date: <strong>{{project.project.startDate}}</strong></span>
+                          <span>End Date: <strong>{{project.project.endDate}}</strong></span>
+                      </li>
+                  </ul>
                 </p-accordionTab>
                 <p-accordionTab header="Skill Details">
-                    Content 2
+                    <ul>
+                        <li *ngFor="let skill of employeeDetail?.employeeSkillList">
+                            <span>Skill Name: <strong>{{skill.skill.skillName}}</strong></span>
+                            <span>Proficiency: <strong>{{skill.rating.ratingScale}}</strong></span>
+                        </li>
+                    </ul>
                 </p-accordionTab>
                 <p-accordionTab header="Interview Details">
-                    Content 3    
+                    <ul>
+                        <li *ngFor="let interview of employeeDetail?.employeeInterviewList">
+                            <span>Interview Domain: <strong>{{interview.interview.interviewDomain}}</strong></span>
+                            <span>Interview Date: <strong>{{interview.interview.interviewDate}}</strong></span>
+                            <span>Proficiency: <strong>{{interview.rating.ratingScale}}</strong></span>
+                        </li>
+                    </ul>   
                 </p-accordionTab>
             </p-accordion>
          </p-accordionTab>

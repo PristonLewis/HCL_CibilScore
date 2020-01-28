@@ -84,11 +84,12 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   private getEmpolyeeDetails(employeeId: string) {
-    const url = '';
+    const url = 'http://10.117.189.144:8081/resource/employees?employeeID=1';
     this.spinner =  true;
     this.api.getList(url).subscribe(detail => {
       this.spinner =  false;
       this.employeeDetail = detail;
+      console.log(detail)
     }, error => {
       this.spinner = false;
     });
