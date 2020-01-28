@@ -21,25 +21,28 @@ export class LoginComponent implements OnInit {
   public logstat=false;
   public testers = false;
   public geturl(f) {
-    return "http://localhost:3000/users?username="+f.value.username+"&password="+f.value.password
+    return "http://10.117.189.151:8081/resource/employees?mailId="+f.value.username+"&password="+f.value.password;
+    // return "http://localhost:3000/users?username="+f.value.username+"&password="+f.value.password
   }
   public login(f): void{
     this.logstat = false;
     console.log(f.value)
     let url = this.geturl(f);
-    this.httpClient.get(url).subscribe((data: Array<any>) => {
-      console.log("data.length", data.length)
-      if(data.length){
+    this.httpClient.post(url,{}).subscribe((data: Array<any>) => {
+      // console.log("data.length", data.length)
+      // if(data.length){
         this.logstat = false;
         localStorage.setItem("auth", "true")
         localStorage.setItem("user", f.value.username)
-        this.router.navigate(['/alllist']);
+        this.router.navigate(['/home']);
         this.auth.changeAuth(f.value.username);
         console.log('logstat if', this.logstat)
-      } else {
-        this.logstat = true;
-        console.log('loagstat else', this.logstat)
-      }
+      // } else {
+      //   this.logstat = true;
+      //   console.log('loagstat else', this.logstat)
+      // }
+    }, (exception) =>{
+      this.logstat = true;
     })
   }
 

@@ -17,6 +17,8 @@
         <div class="col-sm-offset-2 col-sm-10">
             <button>Login</button>
         </div>
+        <br>
+        <p style="color:red" *ngIf="logstat">Invalid username/password</p>
       </div>
       <!-- <div class="form-group">        
         <div class="col-sm-offset-2 col-sm-10">
@@ -25,4 +27,4 @@
       </div>       -->
     </form>
   </div>
-  <p style="color:red" *ngIf="logstat">Invalid username/password</p>
+
