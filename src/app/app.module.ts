@@ -27,7 +27,7 @@ import { TableModule } from 'primeng/table';
     HttpClientModule,
     ChartModule,
     AccordionModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
     TableModule
   ],
   providers: [CommonService],
