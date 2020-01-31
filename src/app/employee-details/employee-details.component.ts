@@ -17,13 +17,14 @@ export class EmployeeDetailsComponent implements OnInit {
     scales: {
       yAxes: [{
         ticks: {
-          stepSize: 0.1,
+          stepSize: 0.5,
           beginAtZero: true,
           suggestedMax: 5,
         }
       }]
     }
   }
+  public index;
   constructor(private api: CommonService, private route: ActivatedRoute) {
     // this.barChartdata = {
     //   labels: ['Java', 'Dot net', 'Js', 'Html', 'Springboot', 'Css', 'Python'],
@@ -175,5 +176,9 @@ export class EmployeeDetailsComponent implements OnInit {
      this.getEmpolyeeDetails(params.id);
     });
   }
-
+  selectData(event: any) {
+    console.log('chartDta', event);
+    this.index = event.element._index;
+    console.log('index', this.index);
+  }
 }

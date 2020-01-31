@@ -35,7 +35,8 @@ export class LoginComponent implements OnInit {
         this.logstat = false;
         localStorage.setItem("auth", "true")
         localStorage.setItem("role", data.role)
-        localStorage.setItem("user", f.value.username)
+        localStorage.setItem("user", f.value.username);
+        localStorage.setItem("eid", data.employeeId);
         // data.role = "admin";
         this.auth.changeAuth(data.role)
         if(data.role == "Manager"){

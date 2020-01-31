@@ -52,12 +52,29 @@
 
                 <div class="col-md-6">
                     <h3>Technical Score</h3>
-                    <p-chart type="bar" [data]="barChartdata" [options]="chartOptions"></p-chart>
+                    <p-chart type="bar" [data]="barChartdata" [options]="chartOptions" ></p-chart>
                 </div> 
                 <div class="col-md-6">
                     <h3>Last One Year Performance</h3>
-                    <p-chart type="pie" [data]="pieChartdata"></p-chart>
+                    <p-chart type="pie" [data]="pieChartdata" (onDataSelect)="selectData($event)"></p-chart>
                 </div>               
+            </div>
+            <div class="row">
+                <!-- <div class="col-md-6">
+                    <h3>Cibil Score</h3>
+                    <p-chart type="pie" [data]="pieChartdata"></p-chart>
+                </div> -->
+
+                <div class="col-md-6" *ngIf="index===0">
+                    Course Training
+                </div> 
+                <div class="col-md-6" *ngIf="index===1">
+                    Bench
+                </div> 
+                <div class="col-md-6" *ngIf="index===2">
+                    Project
+                </div> 
+            
             </div>
             <!-- <div class="row padding-bottom">
                 <div class="col-md-12">
