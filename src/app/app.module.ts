@@ -13,12 +13,17 @@ import {ChartModule} from 'primeng/chart';
 import { CommonService } from './services/common-service';
 import {AccordionModule} from 'primeng/accordion';
 import { TableModule } from 'primeng/table';
+import { CoursesComponent } from './courses/courses.component';
+import { AuthService } from './services/auth.service';
+import { AuthGuardEService } from './services/auth-guard-e.service';
+import { AuthGuardService } from './services/auth-guard.service';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    EmployeeDetailsComponent
+    EmployeeDetailsComponent,
+    CoursesComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +35,7 @@ import { TableModule } from 'primeng/table';
     BrowserAnimationsModule,
     TableModule
   ],
-  providers: [CommonService],
+  providers: [CommonService, AuthService, AuthGuardEService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

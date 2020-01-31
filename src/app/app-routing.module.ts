@@ -3,7 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 import { HomeComponent } from './home/home.component';
-
+import { 
+  AuthGuardService as AuthGuard 
+} from './services/auth-guard.service';
+import { 
+  AuthGuardEService as AuthGuardE 
+} from './services/auth-guard-e.service';
+import { CoursesComponent } from './courses/courses.component';
 
 const routes: Routes = [
   {
@@ -17,15 +23,18 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'employee-detail/:id',
-    component: EmployeeDetailsComponent
+    component: EmployeeDetailsComponent,
+    canActivate: [AuthGuard]
   },
   {
-    path: '**',
-    component: HomeComponent
+    path: 'recomended',
+    component: CoursesComponent,
+    canActivate: [AuthGuardE]
   }
 
 ];

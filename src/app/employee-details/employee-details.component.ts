@@ -13,21 +13,25 @@ export class EmployeeDetailsComponent implements OnInit {
   cibilChartdata: any;
   spinner = false;
   employeeDetail: any;
+  public chartOptions = {
+    scales: {
+      yAxes: [{
+        ticks: {
+          stepSize: 0.1,
+          beginAtZero: true
+        }
+      }]
+    }
+  }
   constructor(private api: CommonService, private route: ActivatedRoute) {
     this.barChartdata = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      labels: ['Java', 'Dot net', 'Js', 'Html', 'Springboot', 'Css', 'Python'],
       datasets: [
         {
           label: 'My First dataset',
           backgroundColor: '#42A5F5',
           borderColor: '#1E88E5',
           data: [65, 59, 80, 81, 56, 55, 40]
-        },
-        {
-          label: 'My Second dataset',
-          backgroundColor: '#9CCC65',
-          borderColor: '#7CB342',
-          data: [28, 48, 40, 19, 86, 27, 90]
         }
       ]
     };
@@ -51,22 +55,73 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   private getOverAllPerformance(employeeId: string) {
-    const url = '';
+    const url = 'http://10.117.189.78:8081/resource/employees/'+employeeId+'/charts?chartType=TECHBAR';
     this.spinner =  true;
     this.api.getList(url).subscribe(performance => {
+      let values = [];
+      let keys = [];
+      performance.data.forEach(element => {
+        keys.push(element.skillName)
+        values.push(element.percentage)
+      });
       this.spinner =  false;
-      this.barChartdata = performance;
+      this.barChartdata.labels = [1,2,3,4];
+      this.barChartdata.datasets[0].data = [1,2,3,4];
+      // this.barChartdata = performance.data;
+      this.barChartdata = {
+        labels: keys,
+        
+        datasets: [
+          {
+            label: 'My First dataset',
+            backgroundColor: '#42A5F5',
+            borderColor: '#1E88E5',
+            data: values
+          }
+        ]
+      };
     }, error => {
       this.spinner = false;
     });
   }
 
   private getYearWiseReport(employeeId: string) {
-    const url = '';
+    const url = 'http://10.117.189.78:8081/resource/employees/'+employeeId+'/charts?chartType=OVERALL';
     this.spinner =  true;
     this.api.getList(url).subscribe(yearList => {
       this.spinner =  false;
-      this.pieChartdata = yearList;
+      // this.pieChartdata = yearList;
+      let values = [];
+      let keys = [];
+      yearList.data.forEach(element => {
+        keys.push(element.skillName)
+        values.push(element.percentage)
+      });
+      this.pieChartdata = {
+        labels: keys,
+        scales: {
+          yAxes: [{
+            ticks: {
+              stepSize: 2,
+              beginAtZero: true
+            }
+          }]
+        },
+        datasets: [
+          {
+            data: values,
+            backgroundColor: [
+              '#FF6384',
+              '#36A2EB',
+              '#FFCE56'
+            ],
+            hoverBackgroundColor: [
+              '#FF6384',
+              '#36A2EB',
+              '#FFCE56'
+            ]
+          }]
+      };
     }, error => {
       this.spinner = false;
     });
@@ -84,11 +139,13 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   private getEmpolyeeDetails(employeeId: string) {
-    const url = 'http://10.117.189.151:8081/resource/employees?employeeID=1';
+    const url = 'http://10.117.189.78:8081/resource/employees/'+employeeId;
+    
     this.spinner =  true;
     this.api.getList(url).subscribe(detail => {
       this.spinner =  false;
       this.employeeDetail = detail;
+      console.log("Emp", this.employeeDetail)
     }, error => {
       this.spinner = false;
     });

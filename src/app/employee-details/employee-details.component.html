@@ -7,7 +7,7 @@
             <p-accordion>
                 <p-accordionTab header="Project Details" >
                   <ul>
-                      <li *ngFor="let project of employeeDetail?.employeeProjectList">
+                      <li *ngFor="let project of employeeDetail?.employeeDetailResponse?.employeeProjectList">
                           <span>Project Name: <strong>{{project.project.projectName}}</strong></span>
                           <span>Start Date: <strong>{{project.project.startDate}}</strong></span>
                           <span>End Date: <strong>{{project.project.endDate}}</strong></span>
@@ -16,7 +16,7 @@
                 </p-accordionTab>
                 <p-accordionTab header="Skill Details">
                     <ul>
-                        <li *ngFor="let skill of employeeDetail?.employeeSkillList">
+                        <li *ngFor="let skill of employeeDetail?.employeeDetailResponse?.employeeSkillList">
                             <span>Skill Name: <strong>{{skill.skill.skillName}}</strong></span>
                             <span>Proficiency: <strong>{{skill.rating.ratingScale}}</strong></span>
                         </li>
@@ -24,32 +24,47 @@
                 </p-accordionTab>
                 <p-accordionTab header="Interview Details">
                     <ul>
-                        <li *ngFor="let interview of employeeDetail?.employeeInterviewList">
+                        <li *ngFor="let interview of employeeDetail?.employeeDetailResponse?.employeeInterviewList">
                             <span>Interview Domain: <strong>{{interview.interview.interviewDomain}}</strong></span>
                             <span>Interview Date: <strong>{{interview.interview.interviewDate}}</strong></span>
                             <span>Proficiency: <strong>{{interview.rating.ratingScale}}</strong></span>
                         </li>
                     </ul>   
                 </p-accordionTab>
+                <p-accordionTab header="Courses Attended">
+                    <ul>
+                        <li *ngFor="let interview of employeeDetail?.employeeDetailResponse?.employeeCourseList">
+                            <span>Course Name: <strong>{{interview.course.courseName}}</strong></span>
+                            <span>Marks Obtained: <strong>{{interview.markObtained}}</strong></span>
+                            <span>Start Date: <strong>{{interview.startDate}}</strong></span>
+                            <span>End Date: <strong>{{interview.endDate}}</strong></span>
+                        </li>
+                    </ul>   
+                </p-accordionTab>                
             </p-accordion>
          </p-accordionTab>
          <p-accordionTab header="Employee Statistics" >
             <div class="row">
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                     <h3>Cibil Score</h3>
                     <p-chart type="pie" [data]="pieChartdata"></p-chart>
-                </div>
+                </div> -->
+
+                <div class="col-md-6">
+                    <h3>Technical Score</h3>
+                    <p-chart type="bar" [data]="barChartdata" [options]="chartOptions"></p-chart>
+                </div> 
                 <div class="col-md-6">
                     <h3>Last One Year Performance</h3>
                     <p-chart type="pie" [data]="pieChartdata"></p-chart>
-                </div>
+                </div>               
             </div>
-            <div class="row padding-bottom">
+            <!-- <div class="row padding-bottom">
                 <div class="col-md-12">
-                    <h3>Overall Performance</h3>
-                    <p-chart type="bar" [data]="barChartdata"></p-chart>
+                    <h3>Technical Score</h3>
+                    <p-chart type="bar" [data]="barChartdata" [options]="chartOptions"></p-chart>
                 </div>
-            </div>
+            </div> -->
          </p-accordionTab>
     </p-accordion>
 </div>

@@ -77,11 +77,7 @@ fdescribe('LoginComponent', () => {
         password: 'xxxxx@123'
       }
     }
-    // component.login(k)
-    console.log("I am here")
-    // console.log(component.logstat)
-    // expect(component.logstat).toEqual(true)
-    // console.log(component.logstat)
+
     const callback = jasmine.createSpy('callback');
     doSomethingLater(component.login);
     jasmine.clock().tick(10000);

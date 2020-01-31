@@ -9,7 +9,11 @@ export class AuthService {
   constructor() { }
   public  subject = new Subject<string>();
   public isAuthenticated(){
-    return localStorage.getItem("auth") == "true"
+    return localStorage.getItem("auth") == "true" && localStorage.getItem("role") == "Manager";
+  }
+
+  public isAuthenticatedEmp(){
+    return localStorage.getItem("auth") == "true" && localStorage.getItem("role") == "Employee";
   }
 
   public changeAuth(username){    
