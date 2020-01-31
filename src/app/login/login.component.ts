@@ -21,13 +21,17 @@ export class LoginComponent implements OnInit {
   public logstat=false;
   public testers = false;
   public geturl(f) {
-    return "http://10.117.189.78:8081/resource/employees?mailId="+f.value.username+"&password="+f.value.password;
+    return "http://10.117.189.181:8081/resource/employees";
     // return "http://localhost:3000/users?username="+f.value.username+"&password="+f.value.password
   }
   public login(f): void{
     this.logstat = false;
     let url = this.geturl(f);
-    this.httpClient.post(url,{}).subscribe((data: any) => {
+    let payload= {
+      mailId: f.value.username,
+      password: f.value.password
+    }
+    this.httpClient.post(url,payload).subscribe((data: any) => {
         this.logstat = false;
         localStorage.setItem("auth", "true")
         localStorage.setItem("role", data.role)

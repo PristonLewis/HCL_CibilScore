@@ -18,63 +18,80 @@ export class EmployeeDetailsComponent implements OnInit {
       yAxes: [{
         ticks: {
           stepSize: 0.1,
-          beginAtZero: true
+          beginAtZero: true,
+          suggestedMax: 5,
         }
       }]
     }
   }
   constructor(private api: CommonService, private route: ActivatedRoute) {
-    this.barChartdata = {
-      labels: ['Java', 'Dot net', 'Js', 'Html', 'Springboot', 'Css', 'Python'],
-      datasets: [
-        {
-          label: 'My First dataset',
-          backgroundColor: '#42A5F5',
-          borderColor: '#1E88E5',
-          data: [65, 59, 80, 81, 56, 55, 40]
-        }
-      ]
-    };
-    this.pieChartdata = {
-      labels: ['A', 'B', 'C'],
-      datasets: [
-        {
-          data: [300, 50, 100],
-          backgroundColor: [
-            '#FF6384',
-            '#36A2EB',
-            '#FFCE56'
-          ],
-          hoverBackgroundColor: [
-            '#FF6384',
-            '#36A2EB',
-            '#FFCE56'
-          ]
-        }]
-    };
+    // this.barChartdata = {
+    //   labels: ['Java', 'Dot net', 'Js', 'Html', 'Springboot', 'Css', 'Python'],
+    //   datasets: [
+    //     {
+    //       label: 'My First dataset',
+    //       backgroundColor: '#42A5F5',
+    //       borderColor: '#1E88E5',
+    //       data: [65, 59, 80, 81, 56, 55, 40]
+    //     },
+    //     ,
+    //             {
+    //                 label: 'My Second dataset',
+    //                 backgroundColor: '#9CCC65',
+    //                 borderColor: '#7CB342',
+    //                 data: [28, 48, 40, 19, 86, 27, 90]
+    //             }
+    //   ]
+    // };
+    // this.pieChartdata = {
+    //   labels: ['A', 'B', 'C'],
+    //   datasets: [
+    //     {
+    //       data: [300, 50, 100],
+    //       backgroundColor: [
+    //         '#FF6384',
+    //         '#36A2EB',
+    //         '#FFCE56'
+    //       ],
+    //       hoverBackgroundColor: [
+    //         '#FF6384',
+    //         '#36A2EB',
+    //         '#FFCE56'
+    //       ]
+    //     }]
+    // };
   }
 
   private getOverAllPerformance(employeeId: string) {
-    const url = 'http://10.117.189.78:8081/resource/employees/'+employeeId+'/charts?chartType=TECHBAR';
+    const url = 'http://10.117.189.181:8081/resource/employees/'+employeeId+'/charts?chartType=TECHBAR';
     this.spinner =  true;
     this.api.getList(url).subscribe(performance => {
       let values = [];
       let keys = [];
+      let selfRating = [];
+      console.log("err",performance)
       performance.data.forEach(element => {
         keys.push(element.skillName)
         values.push(element.percentage)
+        selfRating.push(element.selfRating)
       });
       this.spinner =  false;
-      this.barChartdata.labels = [1,2,3,4];
-      this.barChartdata.datasets[0].data = [1,2,3,4];
+      // this.barChartdata.labels = [1,2,3,4];
+      // this.barChartdata.datasets[0].data = [1,2,3,4];
       // this.barChartdata = performance.data;
       this.barChartdata = {
         labels: keys,
         
         datasets: [
           {
-            label: 'My First dataset',
+            label: 'Self Rating',
             backgroundColor: '#42A5F5',
+            borderColor: '#1E88E5',
+            data: selfRating
+          },
+          {
+            label: 'Technical Rating',
+            backgroundColor: '#32DFAC',
             borderColor: '#1E88E5',
             data: values
           }
@@ -86,7 +103,7 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   private getYearWiseReport(employeeId: string) {
-    const url = 'http://10.117.189.78:8081/resource/employees/'+employeeId+'/charts?chartType=OVERALL';
+    const url = 'http://10.117.189.181:8081/resource/employees/'+employeeId+'/charts?chartType=OVERALL';
     this.spinner =  true;
     this.api.getList(url).subscribe(yearList => {
       this.spinner =  false;
@@ -139,7 +156,7 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   private getEmpolyeeDetails(employeeId: string) {
-    const url = 'http://10.117.189.78:8081/resource/employees/'+employeeId;
+    const url = 'http://10.117.189.181:8081/resource/employees/'+employeeId;
     
     this.spinner =  true;
     this.api.getList(url).subscribe(detail => {

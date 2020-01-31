@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   * method for getting the bench resources
   */
   getDetails = () => {
-    this.service.getList('http://10.117.189.78:8081/resource/employees').subscribe((data) => {
+    this.service.getList('http://10.117.189.181:8081/resource/employees').subscribe((data) => {
       this.response = data;
     });
   }
